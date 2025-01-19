@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Starting build at `date`
       - echo Building the Docker image...          
-      - docker build -f analytics/Dcokerfile -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .
+      - docker build -f analytics/Dockerfile --build-arg DB_USERNAME=myuser --build-arg DB_PASSWORD=mypassword -t $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER .
       - docker tag $IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$CODEBUILD_BUILD_NUMBER    
   post_build:
     commands:
